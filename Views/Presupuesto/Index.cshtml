@@ -1,0 +1,41 @@
+@model List<Presupuesto>
+@{
+    ViewData["Title"] = "Presupuestos";
+}
+
+<h2 class="text-center m-3 fw-bold">Presupuestos</h2>
+
+<div class="d-flex justify-content-end">
+    <a asp-controller="Presupuesto" asp-action="CrearPresupuesto" class="btn btn-success m-2">Cargar presupuesto</a>
+</div>
+
+<table class="table table-bordered m-2">
+    <thead>
+        <tr>
+            <th scope="col" class="text-center">Id</th>
+            <th scope="col" class="text-center">Nombre del destinatario</th>
+            <th scope="col" class="text-center">Fecha de creacion</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var presup in Model)
+        {
+            <tr>
+                <td class="text-center">@presup.IdPresupuesto</td>
+                <td class="text-center">@presup.NombreDestinatario</td>
+                <td class="text-center">@presup.Fecha</td>
+                <td class="text-center d-flex justify-content-center gap-2">
+                    <a asp-controller="Presupuesto" asp-action="ModificarPresupuesto"  method="get" asp-route-id="@presup.IdPresupuesto"
+                    class="btn btn-warning">Modificar</a>
+
+                    <a asp-controller="Presupuesto" asp-action="AsignarProducto"  method="get" asp-route-id="@presup.IdPresupuesto"
+                    class="btn btn-warning">Agregar Detalle</a>
+
+                    <a asp-controller="Presupuesto" asp-action="EliminarPresupuesto" method="get" asp-route-id="@presup.IdPresupuesto"
+                    class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

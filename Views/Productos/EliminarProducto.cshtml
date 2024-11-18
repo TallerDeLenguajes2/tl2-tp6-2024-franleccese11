@@ -1,0 +1,42 @@
+@model Producto;
+@{
+    ViewData["Title"] = "Eliminar Producto";
+}
+
+
+<div class="container mt-5 mb-5">
+    <div class="card border-danger">
+        <div class="card-header bg-danger text-white">
+            <h2>Confirmar Eliminación de Producto</h2>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <strong>Atención:</strong> Esta acción es irreversible. ¿Está seguro que desea eliminar el siguiente producto?
+            </div>
+            
+            <table class="table table-bordered mt-3">
+                <tbody>
+                    <tr>
+                        <th scope="row">ID del Producto</th>
+                        <td>@Model.IdProducto</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Descripción</th>
+                        <td>@Model.Descripcion</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Precio</th>
+                        <td>@Model.Precio</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <form asp-controller="Productos" asp-action="EliminacionConfirmadaProducto"  asp-route-id="@Model.IdProducto" method="post" >
+                <input type="hidden" name="id" value="@Model.IdProducto" />
+                <button type="submit" class="btn btn-danger">Confirmar Eliminación</button>
+            </form>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</div>
