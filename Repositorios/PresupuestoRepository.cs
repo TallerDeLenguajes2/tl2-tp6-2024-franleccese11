@@ -169,7 +169,7 @@ namespace tl2_tp6_2024_franleccese11.Repositorios
                 using (SqliteConnection connection = new(connectionString))
                 {
                     connection.Open();
-                    string queryStr = @"DELETE FROM Presupuesto WHERE idPresupuesto=@id";
+                    string queryStr = @"DELETE FROM Presupuestos WHERE idPresupuesto=@id";
                     SqliteCommand command = new(queryStr, connection);
                     command.Parameters.AddWithValue("@id", id);
                     command.ExecuteNonQuery();
@@ -184,7 +184,33 @@ namespace tl2_tp6_2024_franleccese11.Repositorios
         }
 
 
-
+        public void UpdatePresupuesto(Presupuesto presupuesto)
+        {
+            try
+            {
+                using (SqliteConnection connection = new(connectionString))
+                {
+                    connection.Open();
+                    string queryStr = "UPDATE Presupuestos SET NombreDestinatario =@nombreDestinatario, FechaCreacion=@fec   WHERE idPresupuesto= @id";
+                    SqliteCommand command = new(queryStr,connection);
+                    command.Parameters.AddWithValue("@nombreDestinatario",presupuesto.NombreDestinatario);
+                    command.Parameters.AddWithValue("@fec",presupuesto.Fecha);
+                    command.Parameters.AddWithValue("@id",presupuesto.IdPresupuesto);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        throw new Exception($"No se encontró un presupuesto con el ID {presupuesto.IdPresupuesto}.");
+                    }
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+        
+            }
+            catch (SqliteException ex)
+            {
+                throw new Exception("Error al actualizar el producto",ex);
+            }
+        }
 
     }
 }

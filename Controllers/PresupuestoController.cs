@@ -61,7 +61,45 @@ public class PresupuestoController: Controller
         return RedirectToAction("Index");
     }
 
-   
+     [HttpGet]
+    public IActionResult ModificarPresupuesto(int id)
+    {
+        var presupuesto = repoPresupuesto.ObtenerPresupuesto(id);
+        if (presupuesto is null)
+        {
+            return NotFound();
+        }
+        return View(presupuesto);
+    }
+
+
+    [HttpPost]
+    public IActionResult ModificarPresupuestoPOST(Presupuesto presupuesto)
+    {
+       
+        repoPresupuesto.UpdatePresupuesto(presupuesto);
+        return RedirectToAction("Index");
+    }
+
+
+   [HttpGet]
+    public IActionResult EliminarPresupuesto(int id)
+    {
+        var presupuesto = repoPresupuesto.ObtenerPresupuesto(id);
+        if (presupuesto is null)
+        {
+            return NotFound();
+        }
+        return View(presupuesto);
+    }
+
+    [HttpPost]
+    public IActionResult EliminacionConfirmadaPresupuesto(int id)
+    {
+        
+        repoPresupuesto.EliminarPresupuesto(id);
+        return RedirectToAction("Index");
+    }
 
 
 

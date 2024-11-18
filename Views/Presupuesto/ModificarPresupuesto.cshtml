@@ -1,0 +1,27 @@
+@model Presupuesto;
+@{
+    ViewData["Title"] = "Modificar Presupuesto";
+}
+
+<div class="container mt-5 mb-5">
+    <h2 class="mb-3">Modificar presupuesto</h2>
+
+    <form asp-controller="Presupuesto" asp-action="ModificarPresupuestoPOST" method="post">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="NombreDestinatario" class="form-label">Nombre destinatario:</label>
+                <input type="text" name="NombreDestinatario" id="NombreDestinatario" class="form-control" required  value="@Model.NombreDestinatario">
+            </div>
+        </div>
+
+       
+
+       <input type="hidden" name="IdPresupuesto" value="@Model.IdPresupuesto" />
+       <input type="hidden" name="Fecha" value="@Model.Fecha" />
+        <div class="d-flex gap-2">
+            <a asp-controller="Presupuesto" asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            <button class="btn btn-success" type="submit">Guardar</button>
+        </div>
+    </form>
+</div>
+        

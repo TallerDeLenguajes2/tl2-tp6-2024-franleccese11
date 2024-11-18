@@ -12,9 +12,9 @@ public class Presupuesto
     private List <PresupuestoDetalle> listaDetalle;
 
     private DateTime fecha;
-    public int IdPresupuesto { get => idPresupuesto;}
+    public int IdPresupuesto { get => idPresupuesto; set=> idPresupuesto = value;}
     public string NombreDestinatario { get => nombreDestinatario; set => nombreDestinatario = value; }
-    public DateTime Fecha { get => fecha; set => fecha = value.Date; }
+    public DateTime Fecha { get => fecha; set => fecha = value; }
 
     public void SetID(int id)
     {
